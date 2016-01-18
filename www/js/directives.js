@@ -9,25 +9,21 @@ angular.module('starter.directives', [])
     link: function ($scope, $element, $attr) {
       function initialize() {
         var mapOptions = {
-          center: new google.maps.LatLng(43.07493, -89.381388),
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          center: [43.07493, -89.381388],
+          zoom: 16
         };
-        var map = new google.maps.Map($element[0], mapOptions);
-  
-        $scope.onCreate({map: map});
+        var map = L.map($element[0], mapOptions);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-        // Stop the side bar from dragging when mousedown/tapdown on the map
-        google.maps.event.addDomListener($element[0], 'mousedown', function (e) {
-          e.preventDefault();
-          return false;
-        });
+        $scope.onCreate({map: map});
       }
 
       if (document.readyState === "complete") {
         initialize();
       } else {
-        google.maps.event.addDomListener(window, 'load', initialize);
+        window.addEventListener('load', initialize);
       }
     }
   }

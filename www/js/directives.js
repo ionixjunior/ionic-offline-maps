@@ -9,11 +9,11 @@ angular.module('starter.directives', [])
     link: function ($scope, $element, $attr) {
       function initialize() {
         var mapOptions = {
-          center: [43.07493, -89.381388],
-          zoom: 16
+          center: [-23.568746, -46.647132],
+          zoom: 18
         };
         var map = L.map($element[0], mapOptions);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer('MapQuest/{z}/{x}/{y}.jpg', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
